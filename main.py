@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.subplots as sp
 from streamlit_option_menu import option_menu
+from streamlit_extras.metric_cards import style_metric_cards
 
 #set page
 st.set_page_config(page_title="Business Analytics Dashboard", page_icon="🌎", layout="wide")
@@ -60,6 +61,18 @@ def pie():
   fig.update_traces(textinfo='percent+label', textposition='inside')
   st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
+#top analytics
+def metrics():
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric(label="Total Customers", value=df_selection.Gender.count(), delta="All customers")
+
+    col2.metric(label="Total Annual Salary", value= f"{df_selection.AnnualSalary.sum():,.0f}",delta=df.AnnualSalary.median())
+
+    col3.metric(label="Annual Salary", value= f"{ df_selection.AnnualSalary.max()-df.AnnualSalary.min():,.0f}",delta="Annual Salary Range")
+
+    style_metric_cards(background_color="#121270",border_left_color="#f20045",box_shadow="3px")
 
 #option menu
 
@@ -79,11 +92,12 @@ with st.sidebar:
 
 
 if selected=="Home":
+    metrics()
+    table()
+
+if selected=="Table":
     st.write("Welcome to Business Analytics Dashboard")
     pie()
     barchart()
-
-if selected=="Table":
-    table()
 
 
