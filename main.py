@@ -7,7 +7,7 @@ from streamlit_extras.metric_cards import style_metric_cards
 
 #set page
 st.set_page_config(page_title="CESAG Business Analytics Dashboard", page_icon="🌎", layout="wide")
-st.subheader("📈 Business Analytics Dashboard ")
+st.subheader("📈 CESAG Business Analytics Dashboard ")
 
 #get data from mysql
 df=pd.read_csv('data/customers.csv')
